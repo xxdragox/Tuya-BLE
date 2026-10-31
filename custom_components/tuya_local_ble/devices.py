@@ -226,6 +226,10 @@ devices_database: dict[str, TuyaBLECategoryInfo] = {
             TuyaBLEProductInfo(
                 name="HL Knob-2",
             ),
+            "2hmqh0ty":  # Klloque K10 "KNOB LOCK" (model EL605A), TuyaOS FD50
+            TuyaBLEProductInfo(
+                name="Klloque K10",
+            ),
             "j3n6jw2y":  # model e1n2uw7o
             TuyaBLEProductInfo(
                 name="Smart Lock",

@@ -313,8 +313,24 @@ mapping: dict[str, TuyaBLECategorySensorMapping] = {
                     ),
                 ),
             ],
+            "2hmqh0ty":  # Klloque K10 knob lock (no dp 9 in its cloud schema)
+            [
+                TuyaBLEBatteryMapping(
+                    # dp 8 (residual_electricity), 0-100 %.
+                    dp_id=8,
+                ),
+                TuyaBLESensorMapping(
+                    # dp 12 (unlock_fingerprint), same as ikphogdj.
+                    dp_id=12,
+                    description=SensorEntityDescription(
+                        key="last_fingerprint_unlock_slot",
+                        icon="mdi:fingerprint",
+                        entity_category=EntityCategory.DIAGNOSTIC,
+                    ),
+                ),
+            ],
         }
-    ),      
+    ),
     "szjqr": TuyaBLECategorySensorMapping(
         products={
             **dict.fromkeys(

@@ -179,8 +179,23 @@ mapping: dict[str, TuyaBLECategorySelectMapping] = {
                     ),
                 ),
             ],
+            "2hmqh0ty":  # Klloque K10 knob lock
+            [
+                # dp 31 (beep_volume): cloud range is only mute/normal.
+                TuyaBLESelectMapping(
+                    dp_id=31,
+                    description=SelectEntityDescription(
+                        key="beep_volume",
+                        options=[
+                            "mute",
+                            "normal",
+                        ],
+                        entity_category=EntityCategory.CONFIG,
+                    ),
+                ),
+            ],
         }
-    ),    
+    ),
     "szjqr": TuyaBLECategorySelectMapping(
         products={
             **dict.fromkeys(
@@ -340,7 +355,7 @@ class TuyaBLESelect(TuyaBLEEntity, SelectEntity):
     def _is_raykube_sticky_select(self) -> bool:
         if self._device.product_id == "hc7n0urm":
             return self._mapping.dp_id in (31, 48)
-        if self._device.product_id == "ikphogdj":
+        if self._device.product_id in ("ikphogdj", "2hmqh0ty"):
             return self._mapping.dp_id in (31, 48)
         return False
 

@@ -36,7 +36,7 @@ TuyaBLELockIsAvailable = Callable[["TuyaBLELock", TuyaBLEProductInfo], bool] | N
 # Battery locks that sleep between commands: report state optimistically after
 # a command, linger on the connection briefly, and stay "available" so HA lets
 # the command path connect on demand.
-OPTIMISTIC_PRODUCTS = ("ikphogdj", "j3n6jw2y")
+OPTIMISTIC_PRODUCTS = ("ikphogdj", "2hmqh0ty", "j3n6jw2y")
 
 from typing import Any
 
@@ -135,6 +135,24 @@ mapping: dict[str, TuyaBLECategoryLockMapping] = {
                     # auto-lock events - dp 46 (manual_lock) only fires on
                     # commanded actions. Polarity confirmed twice: dp47=1
                     # after unlock, dp47=0 after lock/auto-lock.
+                    dp_id=47,
+                    value_means_locked=False,
+                    dp_id_nop=52,
+                    keep_connect=False,
+                    keep_connect_timer=60,
+                    description=LockEntityDescription(
+                        key="manual_lock"
+                    ),
+                ),
+            ],
+            "2hmqh0ty":  # Klloque K10 knob lock, same jtmspro/FD50 schema as ikphogdj
+            [
+                TuyaBLELockMapping(
+                    # Cloud thing model: dp 46 manual_lock (rw bool), dp 47
+                    # lock_motor_state (ro bool), dp 71 ble_unlock_check (raw).
+                    # Polarity assumed same as ikphogdj; not yet confirmed.
+                    dp_id_unlock=6,
+                    dp_id_lock=46,
                     dp_id=47,
                     value_means_locked=False,
                     dp_id_nop=52,

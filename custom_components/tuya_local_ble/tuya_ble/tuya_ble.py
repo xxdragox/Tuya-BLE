@@ -798,7 +798,7 @@ class TuyaBLEDevice:
                         device_info_payload = (
                             b"\x00\xf3"
                             if (
-                                self.product_id in ("hc7n0urm", "ikphogdj")
+                                self.product_id in ("hc7n0urm", "ikphogdj", "2hmqh0ty")
                                 or self._uses_fd50_channel
                             )
                             else bytes(0)
@@ -966,13 +966,13 @@ class TuyaBLEDevice:
                 packet += self._pack_int(length)
                 packet_protocol_version = self._protocol_version
                 if code == TuyaBLECode.FUN_SENDER_DEVICE_INFO and (
-                    self.product_id in ("hc7n0urm", "ikphogdj") or self._uses_fd50_channel
+                    self.product_id in ("hc7n0urm", "ikphogdj", "2hmqh0ty") or self._uses_fd50_channel
                 ):
                     packet_protocol_version = 2
                 packet += pack(">B", packet_protocol_version << 4)
 
             chunk_mtu = GATT_MTU
-            if code == TuyaBLECode.FUN_SENDER_DEVICE_INFO and self.product_id != "ikphogdj" and (
+            if code == TuyaBLECode.FUN_SENDER_DEVICE_INFO and self.product_id not in ("ikphogdj", "2hmqh0ty") and (
                 self.product_id in ("hc7n0urm") or self._uses_fd50_channel
             ):
                 # TuyaOS FD50 locks use MTU exchange and expect DEVICE_INFO in one write.
@@ -1412,7 +1412,7 @@ class TuyaBLEDevice:
                 self._parse_raykube_datapoints_v4(data)
             return
 
-        if self.product_id in ("ikphogdj", "j3n6jw2y"):
+        if self.product_id in ("ikphogdj", "2hmqh0ty", "j3n6jw2y"):
             # j3n6jw2y: same jtmspro DP schema; assumed to use the same
             # command-style V4 report framing as ikphogdj (unconfirmed).
             self._parse_ikphogdj_datapoints_v4(data)
@@ -2058,7 +2058,7 @@ class TuyaBLEDevice:
                 )
             return
 
-        if self.product_id in ("ikphogdj", "c6hfl8bt"):
+        if self.product_id in ("ikphogdj", "2hmqh0ty", "c6hfl8bt"):
             if 6 in datapoint_ids:
                 ikphogdj_unlock_v4_data = self._build_raykube_unlock_v4_data()
                 await self._send_packet(
@@ -2201,7 +2201,7 @@ class TuyaBLEDevice:
             await self._send_datapoints_v3(datapoint_ids)
             return
 
-        if self.product_id in ("ikphogdj", "c6hfl8bt") and (
+        if self.product_id in ("ikphogdj", "2hmqh0ty", "c6hfl8bt") and (
             6 in datapoint_ids
             or 46 in datapoint_ids
             or 33 in datapoint_ids

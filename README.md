@@ -64,7 +64,7 @@
 
   The `j3n6jw2y` lock has no lock/unlock command DP; Home Assistant lock/unlock toggles passage mode (dp 78 `special_control`) off/on. No `ble_unlock_check` value is needed.
 
-  HL Knob-2 (`ikphogdj`) devices also require the device-specific `ble_unlock_check` value in `devices.json` for remote unlock. Without it, locking may work but unlocking will fail before a BLE command is built. See [`docs/hl-knob-2-ikphogdj.md`](docs/hl-knob-2-ikphogdj.md).
+  HL Knob-2 (`ikphogdj`) and Klloque K10 (`2hmqh0ty`) devices also require the device-specific `ble_unlock_check` value in `devices.json` for remote unlock. Without it, locking may work but unlocking will fail before a BLE command is built. See [`docs/hl-knob-2-ikphogdj.md`](docs/hl-knob-2-ikphogdj.md).
 </p>
 
 <h2 align="center">Supported Devices</h2>
@@ -135,8 +135,8 @@
     </tr>
     <tr>
       <td>Smart Locks<br>(jtmspro)</td>
-      <td>Raykube A1 Ultra / A1 Pro Max / CTL20H SmartLock / HL Knob-2 / MYPIN HS0358 / j3n6jw2y Smart Lock / EC-LOCK (BAFUWEIY)</td>
-      <td>'rlyxv7pe', 'hc7n0urm', 'y2yaegze', 'ikphogdj', 'c6hfl8bt', 'j3n6jw2y', 'vsf3sqif'</td>
+      <td>Raykube A1 Ultra / A1 Pro Max / CTL20H SmartLock / HL Knob-2 / Klloque K10 / MYPIN HS0358 / j3n6jw2y Smart Lock / EC-LOCK (BAFUWEIY)</td>
+      <td>'rlyxv7pe', 'hc7n0urm', 'y2yaegze', 'ikphogdj', '2hmqh0ty', 'c6hfl8bt', 'j3n6jw2y', 'vsf3sqif'</td>
       <td>Allows lock/unlock control and status monitoring.</td>
     </tr>
     <tr>
